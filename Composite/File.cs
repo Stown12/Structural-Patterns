@@ -25,8 +25,7 @@ public class File: IFileSystemItem
 public class Folder: IFileSystemItem
 {
     private string _name;
-    private decimal _size = 0.0m;
-    private LinkedList<IFileSystemItem> _items = [];
+    private List<IFileSystemItem> _items = [];
     public Folder(string name)
     {
         _name = name;
@@ -34,11 +33,13 @@ public class Folder: IFileSystemItem
 
     public decimal GetSize()
     {
+        
+        decimal size = 0.0m;
         foreach (var item in _items)
         {
-            _size += item.GetSize();
+            size += item.GetSize();
         }
-        return _size;
+        return size;
     }
 
     public string GetName()
@@ -48,6 +49,6 @@ public class Folder: IFileSystemItem
 
     public void Add(IFileSystemItem item)
     {
-        _items.AddLast(item);
+        _items.Add(item);
     }
 }

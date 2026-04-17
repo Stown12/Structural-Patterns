@@ -48,6 +48,24 @@ Este repositorio sirve como espacio de practica para entender como aplicar patro
 3. Cada notificacion envia el mensaje usando su sender actual.
 4. Se cambia el sender de `alert` con `SetSender(sms)` y se reutiliza la misma abstraccion con otro canal.
 
+### Composite
+
+**Objetivo:** tratar objetos individuales (`File`) y composiciones de objetos (`Folder`) de forma uniforme mediante la interfaz `IFileSystemItem`.
+
+**Clases principales:**
+
+- `Composite/IFileSystemItem.cs`: contrato comun con `GetSize()` y `GetName()`.
+- `Composite/File.cs`: hoja (`File`) que representa un archivo con nombre y tamano.
+- `Composite/File.cs`: compuesto (`Folder`) que agrupa items, permite `Add(...)` y calcula su tamano sumando recursivamente el de sus hijos.
+- `Program.cs`: cliente que construye un arbol simple de carpetas/archivos y consulta el tamano total del nodo raiz.
+
+**Flujo del ejemplo:**
+
+1. Se crean carpetas (`root`, `documents`, `music`).
+2. Se agregan archivos a `documents` y `music`.
+3. Se agregan ambas carpetas a `root` junto con un archivo adicional.
+4. Se imprime `root.GetSize()`, que suma todo el contenido del arbol (7805 KB en el ejemplo actual).
+
 ## Ejecutar el proyecto
 
 ```bash
@@ -56,7 +74,6 @@ dotnet run
 
 ## Proximos patrones (pendiente)
 
-- Composite
 - Decorator
 - Facade
 - Flyweight
