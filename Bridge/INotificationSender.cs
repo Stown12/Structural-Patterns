@@ -5,8 +5,22 @@ public interface INotificationSender
     string Type { get; set; }
 }
 
-public interface Notification
+public abstract class Notification
 {
-    void Send(string message);
-    void SetSender(INotificationSender sender);
+    protected INotificationSender _sender;
+    public Notification(INotificationSender sender)
+    {
+        _sender = sender;
+    }
+
+    public virtual void Send(string message)
+    {
+        Console.WriteLine($"Message: {message}");
+        Console.WriteLine($"Using: {_sender.Type}");
+    }
+
+    public void SetSender(INotificationSender sender)
+    {
+        _sender = sender;
+    }
 }
