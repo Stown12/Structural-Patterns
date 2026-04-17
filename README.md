@@ -11,7 +11,7 @@ Este repositorio sirve como espacio de practica para entender como aplicar patro
 - .NET 10 (proyecto de consola)
 - C#
 
-## Patron implementado actualmente
+## Patrones implementados actualmente
 
 ### Adapter
 
@@ -31,6 +31,23 @@ Este repositorio sirve como espacio de practica para entender como aplicar patro
 3. El cliente llama `ProcessPayment(99.99m)` via `IPaymentProcessor`.
 4. El adaptador traduce la llamada y ejecuta `SendMoney("USD", amount)`.
 
+### Bridge
+
+**Objetivo:** desacoplar la abstraccion (`Notification`) de su implementacion (`INotificationSender`) para que ambas jerarquias puedan evolucionar y combinarse de forma independiente.
+
+**Clases principales:**
+
+- `Bridge/INotificationSender.cs`: contrato de envio y clase base `Notification` que delega el canal usado.
+- `Bridge/EmailSender.cs`: implementaciones concretas del canal (`EmailSender`, `SmsSender`) y tipos de notificacion (`AlertNotification`, `ReminderNotification`).
+- `Program.cs`: cliente que combina tipos de notificacion y canales, y cambia el canal en tiempo de ejecucion con `SetSender(...)`.
+
+**Flujo del ejemplo:**
+
+1. Se crean dos implementaciones del sender: `EmailSender` y `SmsSender`.
+2. Se crean dos abstracciones refinadas: `AlertNotification` y `ReminderNotification`.
+3. Cada notificacion envia el mensaje usando su sender actual.
+4. Se cambia el sender de `alert` con `SetSender(sms)` y se reutiliza la misma abstraccion con otro canal.
+
 ## Ejecutar el proyecto
 
 ```bash
@@ -39,7 +56,6 @@ dotnet run
 
 ## Proximos patrones (pendiente)
 
-- Bridge
 - Composite
 - Decorator
 - Facade
