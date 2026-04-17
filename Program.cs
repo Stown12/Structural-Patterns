@@ -1,21 +1,26 @@
 ﻿
-using Structural_patterns.Adapter;
-using Structural_patterns.Bridge;
+
+using Structural_patterns.Composite;
+using File = Structural_patterns.Composite.File;
 
 class Program
 {
     public static void Main(string[] args)
     {
-        INotificationSender email = new EmailSender();
-        INotificationSender sms = new SmsSender();
+        Folder root = new Folder("root");
+        Folder documents = new Folder("documents");
+        Folder music = new Folder("music");
 
-        Notification alert = new AlertNotification(email);
-        Notification reminder = new ReminderNotification(sms);
-        
-        alert.Send("This is an alert notification.");
-        reminder.Send("This is a reminder notification.");
+        documents.Add(new File("readme.txt", 10));
+        documents.Add(new File("cover_letter.docx", 85));
 
-        alert.SetSender(sms);
-        alert.Send("This is an alert notification.");
+        music.Add(new File("song1.mp3", 4500));
+        music.Add(new File("song2.mp3", 3200));
+
+        root.Add(documents);
+        root.Add(music);
+        root.Add(new File("readme.txt", 10));
+
+        Console.WriteLine($"{root.GetName()}: {root.GetSize()} KB");
     }
 }
