@@ -66,6 +66,24 @@ Este repositorio sirve como espacio de practica para entender como aplicar patro
 3. Se agregan ambas carpetas a `root` junto con un archivo adicional.
 4. Se imprime `root.GetSize()`, que suma todo el contenido del arbol (7805 KB en el ejemplo actual).
 
+### Decorator
+
+**Objetivo:** agregar responsabilidades dinamicamente a un objeto (`Coffe`) envolviendolo con decoradores (`Milk`, `Sugar`, `Vanilla`) que mantienen la misma interfaz `IBeverage`.
+
+**Clases principales:**
+
+- `Decorator/IBeverage.cs`: contrato comun (`GetDescription()` y `GetCost()`) y base decoradora `BeverageDecorator` que delega al componente envuelto.
+- `Decorator/Coffe.cs`: componente concreto `Coffe` con costo base (`1.00m`) y descripcion inicial.
+- `Decorator/Coffe.cs`: decoradores concretos `Milk`, `Sugar` y `Vanilla`, cada uno agrega costo y texto a la descripcion.
+- `Program.cs`: cliente que compone el objeto en tiempo de ejecucion encadenando decoradores.
+
+**Flujo del ejemplo:**
+
+1. Se crea la bebida base: `IBeverage coffe = new Coffe()`.
+2. Se envuelve con `Milk`, luego con `Sugar` y finalmente con `Vanilla`.
+3. Cada decorador delega al anterior y suma su propia contribucion.
+4. Se imprime la descripcion final y el costo acumulado con `GetDescription()` y `GetCost()`.
+
 ## Ejecutar el proyecto
 
 ```bash
@@ -74,7 +92,6 @@ dotnet run
 
 ## Proximos patrones (pendiente)
 
-- Decorator
 - Facade
 - Flyweight
 - Proxy
