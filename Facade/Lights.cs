@@ -8,8 +8,8 @@ public class Lights
 
 public class AirConditioner
 {
-    public void SetTemperature() => Console.WriteLine("Air conditioner temperature set: 22°C.");
-    public void TurnOff() => Console.WriteLine("Air conditioner turned off: 18°C.");
+    public void SetTemperature(decimal temp) => Console.WriteLine($"Air conditioner temperature set:{temp}°C.");
+    public void TurnOff() => Console.WriteLine("Air conditioner turned off.");
 }
 
 public class SecuritySystem
@@ -40,7 +40,7 @@ public class SmartHomeFacade
     public void ArriveHome()
     {
         _lights.TurnOn();
-        _airConditioner.SetTemperature();
+        _airConditioner.SetTemperature(22.00m);
         _securitySystem.Disarm();
     }
 }

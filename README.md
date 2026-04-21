@@ -84,6 +84,22 @@ Este repositorio sirve como espacio de practica para entender como aplicar patro
 3. Cada decorador delega al anterior y suma su propia contribucion.
 4. Se imprime la descripcion final y el costo acumulado con `GetDescription()` y `GetCost()`.
 
+### Facade
+
+**Objetivo:** simplificar el uso de un conjunto de subsistemas del hogar (`Lights`, `AirConditioner` y `SecuritySystem`) a traves de una unica interfaz (`SmartHomeFacade`).
+
+**Clases principales:**
+
+- `Facade/Lights.cs`: contiene los subsistemas `Lights`, `AirConditioner` y `SecuritySystem`.
+- `Facade/Lights.cs`: incluye `SmartHomeFacade`, que coordina las acciones de los subsistemas.
+
+**Flujo del ejemplo:**
+
+1. `SmartHomeFacade` recibe las instancias de `Lights`, `AirConditioner` y `SecuritySystem`.
+2. Al llamar `LeaveHome()`, apaga luces, apaga el aire acondicionado y arma el sistema de seguridad.
+3. Al llamar `ArriveHome()`, enciende las luces, ajusta la temperatura a `22.00m` y desarma el sistema de seguridad.
+4. El cliente interactua solo con la fachada y no con cada subsistema por separado.
+
 ## Ejecutar el proyecto
 
 ```bash
@@ -92,7 +108,6 @@ dotnet run
 
 ## Proximos patrones (pendiente)
 
-- Facade
 - Flyweight
 - Proxy
 
