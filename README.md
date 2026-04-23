@@ -100,6 +100,24 @@ Este repositorio sirve como espacio de practica para entender como aplicar patro
 3. Al llamar `ArriveHome()`, enciende las luces, ajusta la temperatura a `22.00m` y desarma el sistema de seguridad.
 4. El cliente interactua solo con la fachada y no con cada subsistema por separado.
 
+### Flyweight
+
+**Objetivo:** reducir el uso de memoria compartiendo el estado intrinseco de objetos repetidos (`TreeFlyweight`) y separandolo del estado extrinseco (`x`, `y`) que vive en cada `Tree`.
+
+**Clases principales:**
+
+- `FlyWeight/Tree.cs`: define `TreeFlyweight` (estado compartido: `Type`, `Color`, `Texture`) y `Tree` (estado variable por instancia: posicion `x`, `y`).
+- `FlyWeight/TreeFlyweightFactory.cs`: fabrica/cache que reutiliza flyweights por tipo (`Oak`, `Pine`, `Birch`) mediante `GetFlyweight(...)` y expone `Count()`.
+- `Program.cs`: cliente que crea 1000 arboles, solicita flyweights al factory y muestra cuantas instancias reales compartidas quedaron en memoria.
+
+**Flujo del ejemplo:**
+
+1. En un ciclo de 1000 iteraciones, el cliente decide el tipo de arbol (`Oak`, `Pine`, `Birch`).
+2. Para cada tipo, solicita un flyweight al `TreeFlyweightFactory`.
+3. Si el tipo no existe en cache, el factory lo crea una sola vez; si ya existe, lo reutiliza.
+4. Cada `Tree` guarda solo su posicion y referencia al flyweight compartido.
+5. Al final, se imprime la cantidad total de arboles y la cantidad de flyweights en memoria (3 en el escenario actual).
+
 ## Ejecutar el proyecto
 
 ```bash
@@ -108,10 +126,8 @@ dotnet run
 
 ## Proximos patrones (pendiente)
 
-- Flyweight
 - Proxy
 
 ---
 
 Ire actualizando este README conforme agregues nuevos ejercicios/patrones al proyecto.
-

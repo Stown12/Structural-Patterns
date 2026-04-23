@@ -1,5 +1,3 @@
-using Structural_patterns.FlyWeight.FactoriesFlyWeight;
-
 namespace Structural_patterns.FlyWeight;
 
 public class TreeFlyweightFactory
@@ -13,9 +11,9 @@ public class TreeFlyweightFactory
         {
             var flyweight = type switch
             {
-                "Oak"   => OakFlyweightCreator.CreateFlyweight(),
-                "Pine"  =>  PineFlyweightCreator.CreateFlyweight(),
-                "Birch" =>  BirchFlyweightCreator.CreateFlyweight(),
+                "Oak"   => new TreeFlyweight("Oak", "Green", "Rough"),
+                "Pine"  =>  new TreeFlyweight("Pine", "Strong Green", "Peeling"),
+                "Birch" =>  new TreeFlyweight("Birch", "White", "Smooth"),
                 _       => throw new ArgumentException($"Unknown tree type: {type}")
             };
             _flyweights[type] = flyweight;
