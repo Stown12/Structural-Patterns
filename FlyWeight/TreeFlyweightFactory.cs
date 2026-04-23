@@ -9,16 +9,18 @@ public class TreeFlyweightFactory
 
     public static TreeFlyweight GetFlyweight(string type)
     {
-        var flyweight = type switch
+        if (!_flyweights.ContainsKey(type))
         {
-            "Oak"   => OakFlyweightCreator.CreateFlyweight(),
-            "Pine"  =>  PineFlyweightCreator.CreateFlyweight(),
-            "Birch" =>  BirchFlyweightCreator.CreateFlyweight(),
-            _       => throw new ArgumentException($"Unknown tree type: {type}")
-        };
-        _flyweights[type] = flyweight;
-        Console.WriteLine($"[Factory] Created new flyweight: {type}");
-
+            var flyweight = type switch
+            {
+                "Oak"   => OakFlyweightCreator.CreateFlyweight(),
+                "Pine"  =>  PineFlyweightCreator.CreateFlyweight(),
+                "Birch" =>  BirchFlyweightCreator.CreateFlyweight(),
+                _       => throw new ArgumentException($"Unknown tree type: {type}")
+            };
+            _flyweights[type] = flyweight;
+            Console.WriteLine($"[Factory] Created new flyweight: {type}"); 
+        }
         return _flyweights[type];
     }
     
