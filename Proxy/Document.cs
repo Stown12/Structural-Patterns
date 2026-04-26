@@ -26,18 +26,20 @@ public class DocumentProxy: IDocument
     private string _role;
     public DocumentProxy(string role)
     {
-        _role = role;
+        
+        _role = role.TrimStart().TrimEnd().ToUpper();
     }
+    
     public void Read()
     {
-        if (_role.ToUpper() != "ADMIN" && _role.ToUpper() != "VIEWER")
+        if (_role != "ADMIN" && _role != "VIEWER")
             throw new NotSupportedException("Only ADMIN and VIEWER are supported");
         _document.Read();
     }
 
     public void Edit()
     {
-        if(_role.ToUpper() != "ADMIN")
+        if(_role != "ADMIN")
             throw new NotSupportedException("Only ADMIN are supported");
         _document.Edit();
     }
