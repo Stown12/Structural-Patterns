@@ -32,15 +32,15 @@ public class DocumentProxy: IDocument
     
     public void Read()
     {
-        if (_role != "ADMIN" && _role != "VIEWER")
-            throw new NotSupportedException("Only ADMIN and VIEWER are supported");
+        if (_role != "ADMIN" && _role != "VIEWER" && _role != "EDITOR")
+            throw new NotSupportedException("Only ADMIN, VIEWER and EDITOR are supported");
         _document.Read();
     }
 
     public void Edit()
     {
-        if(_role != "ADMIN")
-            throw new NotSupportedException("Only ADMIN are supported");
+        if(_role != "ADMIN" && _role != "EDITOR")
+            throw new NotSupportedException("Only ADMIN and EDITOR, are supported");
         _document.Edit();
     }
 }
